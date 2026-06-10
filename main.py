@@ -1,5 +1,5 @@
-from lib.interface import *
-from lib.data_base import *
+from biblioteca.interface import *
+from biblioteca.data_base import *
 from time import sleep
 import sqlite3
 
@@ -30,5 +30,7 @@ while True:
     elif r == 6:
         cabeçalho('SAINDO DO SISTEMA... VOLTE LOGO!')
         break
+    else:
+        print("Opção inválida")
     input("Aperte ENTER para continuar!")
 conexao.close()
