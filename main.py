@@ -1,10 +1,8 @@
-from biblioteca.interface import *
 from biblioteca.data_base import *
-from time import sleep
-import sqlite3
 
 
 while True:
+    limpar_tela()
     r = menu(['Cadastrar nova pessoa', 'Listar pessoas', 'Busar pessoa', 'Remover pessoa','Atualizar dados', 'Sair do programa'])
     if r == 1:
         cabeçalho('CADASTRAR NOVA PESSOA')
