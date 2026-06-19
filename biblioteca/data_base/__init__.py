@@ -12,8 +12,19 @@ email TEXT NOT NULL UNIQUE
 )""")
 conexao.commit()
 
-def cadastrar(n, t, e):
-
+def cadastrar():
+    n = input("Nome (Digite SAIR para cancelar operação): ").strip()
+    if n.lower() == 'sair':
+        print("Operação cancelada")
+        return
+    t = input("Telefone (Digite SAIR para cancelar operação): ").strip()
+    if t.lower() == 'sair':
+        print("Operação cancelada")
+        return
+    e = input("E-mail (Digite SAIR para cancelar operação): ").strip()
+    if e.lower() == 'sair':
+        print("Operação cancelada")
+        return
     while True:
         try:
             cursor.execute("""
@@ -38,7 +49,11 @@ def listar():
     for dado in contas:
         print(f"{dado[0]:<5}{dado[1]:<25}{dado[2]:<18}{dado[3]}")
 
-def buscar(id):
+def buscar():
+    id = leiaint("ID (Digite 0 para cancelar operação): ")
+    if id == 0:
+        print("Operação cancelada")
+        return
     cursor.execute("""
     SELECT * FROM usuario
     WHERE id = ?
@@ -54,8 +69,11 @@ def buscar(id):
     #for dado in contas:
     print(f"{dado[0]:<5}{dado[1]:<25}{dado[2]:<18}{dado[3]}")
 
-def remover(id):
-    id_usuario = id
+def remover():
+    id_usuario = leiaint("ID (Digite 0 para cancelar operação): ")
+    if id_usuario == 0:
+        print("Operação cancelada")
+        return
     cursor.execute("""DELETE FROM usuario WHERE ID = ?""", (id_usuario,))
     conexao.commit()
     if cursor.rowcount > 0:
@@ -63,8 +81,11 @@ def remover(id):
     else:
         print("ID não encontrado!")
 
-def atualizar(id):
-    id_usuario = id
+def atualizar():
+    id_usuario = leiaint("ID (Digite 0 para cancelar operação): ")
+    if id_usuario == 0:
+        print("Operação cancelada")
+        return
     r = menu_atu(['Nome','Telefone', 'E-mail'])
     if r == 1:
         nome_novo = input("Novo nome: ")
